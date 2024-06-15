@@ -29,6 +29,7 @@ async function run() {
     const spotCollection = client.db('spotDB').collection('spot');
     const countryCollection = client.db('spotDB').collection('country');
     const userSpotCollection = client.db('spotDB').collection('userspot');
+    const userCollection = client.db('spotDB').collection('user');
 
    
     
@@ -137,10 +138,45 @@ async function run() {
             seasonality: updatedSpot.seasonality
         }
     };
-    const result = await userSpotCollection.updateOne(filter, updatedFields); // Assuming userSpotCollection is your collection name
+    const result = await userSpotCollection.updateOne(filter, updatedFields);  
     res.send(result);
 });
 
+// user related api
+
+app.get('/user' ,async(req ,res) =>{
+  const cursor = userCollection.find();
+  const users = await cursor.toArray();
+  res.send(users);
+})
+
+
+
+app.post('/user' ,async(req ,res) =>{
+  const user = req.body;
+  console.log(user);
+  const result = await userCollection.insertOne(user);
+  res.send(result);
+})
+
+app.patch('/user' , async(req ,res) =>{
+  const user = req.body;
+  const filter = {email:user.email}
+  const updateDoc ={
+    $set:{
+      lastLoggedAt: user.lastLoggedAt
+    }
+  }
+  const result = await userCollection.updateOne(filter,updateDoc);
+  res.send(result);
+})
+
+app.delete('/user/:id' , async(req , res) =>{
+  const id = req.params.id;
+  const query = {_id: new ObjectId(id)};
+  const result = await userCollection.deleteOne(query);
+  res.send(result);
+})
 
 
     // Send a ping to confirm a successful connection
