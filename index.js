@@ -481,13 +481,9 @@ async function run() {
       res.send(result);
     });
 
-    // Fetch all country spots
-// app.get('/countrySpot', async (req, res) => {
-//   const countries = await countrySpotCollection.find().toArray();
-//   res.send({ countries });
-// });
 
-// Fetch a country spot by id
+
+
 app.get('/countrySpot/:id', async (req, res) => {
   const id = parseInt(req.params.id);
   const result = await countrySpotCollection.findOne({ 'tourismSpots.id': id });
@@ -507,22 +503,7 @@ app.post('/countrySpot', async (req, res) => {
 });
 
    
-    // app.get('/countrySpot/:id', async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { "tourismSpots.id": parseInt(id) };
-    //   const result = await countrySpotCollection.findOne(query);
-    //   res.send(result);
-    // });
     
-
-    // app.post('/countryspot', async (req, res) => {
-    //   const newCountrySpot = req.body;
-    //   const result = await countrySpotCollection.insertOne(newCountrySpot);
-    //   res.send(result);
-    // });
-    
-
-    /******/ 
 
 
     // SPOT API
