@@ -481,26 +481,45 @@ async function run() {
       res.send(result);
     });
 
+    // Fetch all country spots
+// app.get('/countrySpot', async (req, res) => {
+//   const countries = await countrySpotCollection.find().toArray();
+//   res.send({ countries });
+// });
+
+// Fetch a country spot by id
+app.get('/countrySpot/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  const result = await countrySpotCollection.findOne({ 'tourismSpots.id': id });
+  if (result) {
+    const tourismSpot = result.tourismSpots.find(spot => spot.id === id);
+    res.send(tourismSpot);
+  } else {
+    res.status(404).send({ message: 'Spot not found' });
+  }
+});
+
+// Add a new country spot
+app.post('/countrySpot', async (req, res) => {
+  const newCountrySpot = req.body;
+  const result = await countrySpotCollection.insertOne(newCountrySpot);
+  res.send(result);
+});
+
+   
     // app.get('/countrySpot/:id', async (req, res) => {
     //   const id = req.params.id;
-    //   const query = { id: new ObjectId(id) };
+    //   const query = { "tourismSpots.id": parseInt(id) };
     //   const result = await countrySpotCollection.findOne(query);
     //   res.send(result);
     // });
-    app.get('/countryspot/:id', async (req, res) => {
-      const id =(req.params.id); // Parse ID as an integer
-      const query = { _id :new ObjectId(id) }; // Query using the custom `id` field
-      const result = await countrySpotCollection.findOne(query);
-      res.send(result);
-    });
-   
+    
 
-
-    app.post('/countryspot', async (req, res) => {
-      const newCountrySpot = req.body;
-      const result = await countrySpotCollection.insertOne(newCountrySpot);
-      res.send(result);
-    });
+    // app.post('/countryspot', async (req, res) => {
+    //   const newCountrySpot = req.body;
+    //   const result = await countrySpotCollection.insertOne(newCountrySpot);
+    //   res.send(result);
+    // });
     
 
     /******/ 
