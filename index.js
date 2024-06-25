@@ -34,16 +34,16 @@ async function run() {
 
    
     
-    // app.get('/spot/:id', (req, res) => {
-    //   const spotId = req.params.id;
-    //   const spot = spotData.find((s) => s.id === spotId);
+    app.get('/spot/:id', (req, res) => {
+      const spotId = req.params.id;
+      const spot = spotData.find((s) => s.id === spotId);
     
-    //   if (spot) {
-    //     res.json(spot);
-    //   } else {
-    //     res.status(404).send('Spot not found');
-    //   }
-    // });
+      if (spot) {
+        res.json(spot);
+      } else {
+        res.status(404).send('Spot not found');
+      }
+    });
     
 
     /******/
