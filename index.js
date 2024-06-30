@@ -499,18 +499,103 @@ app.post('/countrySpot', async (req, res) => {
 
 
     // SPOT API
-    app.get('/spot', async (req, res) => {
-      const { sort = 'asc' } = req.query;
-      const sortOrder = sort === 'asc' ? 1 : -1;
-      const cursor = spotCollection.find().sort({ averagecost: sortOrder });
-      const result = await cursor.toArray();
-      res.send(result);
-    });
+    // app.get('/spot', async (req, res) => {
+    //   const { sort = 'asc' } = req.query;
+    //   const sortOrder = sort === 'asc' ? 1 : -1;
+    //   const cursor = spotCollection.find().sort({ averagecost: sortOrder });
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+    // });
 
     app.get('/spot', async (req, res) => {
-      const cursor = spotCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
+      res.send(
+        [
+          {
+          "_id": "666337d0905856bbe0a42b0b",
+          "userName": "Nusrat Jahan",
+          "email": "nusrat@gmail.com",
+          "spotName": "Saint Martin's Island",
+          "countryName": "Bangladesh",
+          "location": "Bay of Bengal",
+          "description": "Saint Martin's Island is the only coral island in Bangladesh, known for its clear blue waters, sandy beaches, and vibrant marine life. It's a popular destination for relaxation and water activities.\nSaint Martin's Island, with its clear blue waters, sandy beaches, and vibrant marine life, is a unique and captivating destination. Whether you're looking to relax on the beach, explore the underwater world, or immerse yourself in the local culture, the island offers something for everyone. A visit to this coral paradise is sure to be a memorable and rejuvenating experience.",
+          "image": "https://i.ibb.co/GM7MqTL/Saint-Martin-Travels-awesome-Beautiful-experience.png",
+          "averagecost": "100",
+          "traveltime": "2 days",
+          "totalvisitors": "50000",
+          "seasonality": "Winter"
+          },
+          {
+          "_id": "6663319e905856bbe0a42b06",
+          "userName": "Nafu Ahmeed",
+          "email": "nafi@gmail.com",
+          "spotName": "Sundarban",
+          "countryName": "Bangladesh",
+          "location": "Khulna",
+          "description": "A vast forest in the coastal region of the Bay of Bengal, famous for its unique mangrove ecosystem and the Bengal tiger.The Sundarbans, with its enchanting mangrove forests and the majestic Bengal tiger, offers a unique and unforgettable experience. It stands as a testament to the intricate balance of nature and the enduring beauty of the wild. Come and discover the magic of the Sundarbans, where every visit promises a new adventure and a deeper connection with nature.",
+          "image": "https://i.ibb.co/XthzyB2/04n0mzmjcm6m2o00hm585v4fkbn5-sundarban-day-2002140623.png",
+          "averagecost": "200",
+          "traveltime": "5 days",
+          "totalvisitors": "150000",
+          "seasonality": "Winter"
+          },
+          {
+          "_id": "666333f3905856bbe0a42b07",
+          "userName": "Swaira Fatiha",
+          "email": "sawaira@gmail.com",
+          "spotName": "Bangkok",
+          "countryName": "Thailand",
+          "location": "Central Thailand",
+          "description": "      The capital city known for its vibrant street life, cultural landmarks, and bustling markets.\nBangkok, the capital city of Thailand, is renowned for its vibrant street life, cultural landmarks, and bustling markets. This dynamic metropolis, situated on the Chao Phraya River, is a hub of activity where tradition meets modernity in a unique blend.",
+          "image": "https://i.ibb.co/3Yr85Xx/gettyimages-1408713221-612x612.jpg",
+          "averagecost": "500",
+          "traveltime": "7 days",
+          "totalvisitors": "22000000",
+          "seasonality": "All year"
+          },
+          {
+          "_id": "666336eb905856bbe0a42b0a",
+          "userName": "Nusrat Jahan",
+          "email": "nusrat@gmail.com",
+          "spotName": "Rangamati",
+          "countryName": "Bangladesh",
+          "location": "Rangamati Hill District",
+          "description": "Rangamati is known for its picturesque landscapes, lakes, and hills. It is a popular destination for nature lovers and those seeking tranquility.Rangamati, with its picturesque landscapes, tranquil lakes, and rolling hills, is a perfect destination for those seeking tranquility and a close connection with nature. Its rich cultural heritage and diverse attractions offer a unique and memorable experience for every visitor. Whether exploring its scenic beauty or immersing in its cultural richness, Rangamati promises a serene and enchanting escape from the hustle and bustle of everyday life.",
+          "image": "https://i.ibb.co/2F9sGZS/vtcz9-Mk2q-Fct-Vum-H283nm1gk-OE3u-F63iu-T77-Heay.jpg",
+          "averagecost": "500 ",
+          "traveltime": "3 days",
+          "totalvisitors": "100000",
+          "seasonality": "Winter"
+          },
+          {
+          "_id": "6663359b905856bbe0a42b09",
+          "userName": "Nusrat Jahan",
+          "email": "nusrat@gmail.com",
+          "spotName": "Kuala Lumpur",
+          "countryName": "Malaysia",
+          "location": "West Malaysia",
+          "description": "    The capital city known for its modern skyline dominated by the iconic Petronas Twin Towers.\nKuala Lumpur is a dynamic capital city that seamlessly blends modernity with cultural richness. Its iconic Petronas Twin Towers dominate a skyline filled with architectural wonders, while its cultural landmarks, bustling markets, and diverse cuisine reflect the city's multifaceted character. Whether exploring its contemporary marvels or delving into its cultural heritage, Kuala Lumpur offers a captivating experience for every visitor.",
+          "image": "https://i.ibb.co/TtpfftV/download.jpg",
+          "averagecost": "600 ",
+          "traveltime": "7 days",
+          "totalvisitors": "9000000",
+          "seasonality": "All year"
+          },
+          {
+          "_id": "666334e6905856bbe0a42b08",
+          "userName": "Nusaiba Halim",
+          "email": "nusaiba@gmail.com",
+          "spotName": "Bali",
+          "countryName": "Indonesia",
+          "location": "Island of Bali",
+          "description": "    An Indonesian island known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.\nBali is a captivating island that offers a diverse range of experiences for every traveler. Its forested volcanic mountains, iconic rice paddies, stunning beaches, and vibrant coral reefs create a natural paradise, while its rich cultural heritage adds depth and charm to the island. Whether you are seeking adventure, relaxation, or cultural exploration, Bali promises an unforgettable journey into the heart of Indonesia's natural and cultural wonders.",
+          "image": "https://i.ibb.co/SsqFxVJ/gettyimages-1171238080-612x612.jpg",
+          "averagecost": "800",
+          "traveltime": "10 days",
+          "totalvisitors": "6000000",
+          "seasonality": "All year"
+          }
+          ]
+      )
     });
 
 
